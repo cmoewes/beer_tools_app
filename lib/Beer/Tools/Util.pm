@@ -1,4 +1,4 @@
-package Beer::Tools;
+package Beer::Tools::Util;
 
 use Moose;
 
