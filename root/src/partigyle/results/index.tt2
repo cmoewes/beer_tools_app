@@ -1,0 +1,21 @@
+<table border=1 cellpadding=2 cellspacing=1>
+	<thead>
+		<tr>
+			<th>Batch</th>
+			<th>Volume</th>
+			<th>Gravity</th>
+			<th>Plato</th>
+		</tr>
+	</thead>
+	<tbody>
+		[% FOREACH beer IN results %]
+		<tr align='center'>
+			<td>[% beer.split %]</td>
+			<td>[% beer.gallons %]</td>
+			<td>[% beer.gravity %]</td>
+			<td>[% beer.plato %]</td>
+		</tr>
+		[% END %]
+	</tbody>
+
+</table>

@@ -13,7 +13,9 @@ sub return_split {
 	my $large_gravity = ( $total_points * .65 ) / $split_volume;
 	my $small_gravity = ( $total_points * .35 ) / $split_volume;
 
-	return [ { plato => $small_gravity, gallone => $split_volume }, { plato => $large_gravity, gallons => $split_volume }, ]
+	return [ 
+		{ 'split' => 'small', plato => $small_gravity, gallons => $split_volume }, 
+		{ 'split' => 'large', plato => $large_gravity, gallons => $split_volume }, ]
 
 }
 

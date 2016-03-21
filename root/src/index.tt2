@@ -1,0 +1,95 @@
+[% WRAPPER site_wrapper.tt2 %]
+
+
+
+<div id="accordion">
+  <h3>Partigyle Split from Large Mash</h3>
+  <div>
+    <p>
+	<div style='float:left; padding-right: 20px'>
+	<form>
+	
+		<label for='starting_gravity'>Full Gravity</label> <input size=6 type=text id='starting_gravity' name='starting_gravity' value='1.065'><br>
+		<label for='starting_volume'>Full Volume</label> <input size=6 type=text id='starting_volume' name='starting_volume' value='14'><br>
+		<button id='calculate_partigyle'>Calculate</button>
+	
+	</form>
+	</div>
+	
+	<div id='partigyle_results' style='flaot:right;margin-left: 20px'></div>
+
+
+    </p>
+  </div>
+  <h3>Partigyle Mash from Small Beer</h3>
+  <div>
+     <p>
+	<div style='float:left; padding-right: 20px'>
+	<form>
+	
+		<label for='small_starting_gravity'>Small Gravity</label> <input size=6 type=text id='small_starting_gravity' name='small_starting_gravity' value='1.065'><br>
+		<label for='small_starting_volume'>Small Volume</label> <input size=6 type=text id='small_starting_volume' name='small_starting_volume' value='14'><br>
+		<button id='small_calculate_partigyle'>Calculate</button>
+	
+	</form>
+	</div>
+	
+	<div id='small_partigyle_results' style='flaot:right;margin-left: 20px'></div>
+
+
+    </p>
+  </div>
+  <h3>Partigyle Mash from Large Beer</h3>
+  <div>
+    <p>
+	<div style='float:left; padding-right: 20px'>
+	<form>
+	
+		<label for='large_starting_gravity'>Large Gravity</label> <input size=6 type=text id='large_starting_gravity' name='large_starting_gravity' value='1.065'><br>
+		<label for='large_starting_volume'>Large Volume</label> <input size=6 type=text id='large_starting_volume' name='large_starting_volume' value='14'><br>
+		<button id='large_calculate_partigyle'>Calculate</button>
+	
+	</form>
+	</div>
+	
+	<div id='large_partigyle_results' style='flaot:right;margin-left: 20px'></div>
+
+
+    </p>
+  </div>
+
+</div>
+
+
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion();
+    
+    $('#calculate_partigyle').bind('click', function(){ 
+    	$('#partigyle_results').load("[% c.uri_for("/partigyle/results") %]", {
+    		starting_gravity : $('#starting_gravity').val(),
+    		starting_volume : $('#starting_volume').val()
+    	})
+    	return false	
+    })
+
+    $('#small_calculate_partigyle').bind('click', function(){ 
+    	$('#small_partigyle_results').load("[% c.uri_for("/partigyle/results/small") %]", {
+    		starting_gravity : $('#small_starting_gravity').val(),
+    		starting_volume : $('#small_starting_volume').val()
+    	})
+    	return false	
+    })
+    
+    $('#large_calculate_partigyle').bind('click', function(){ 
+    	$('#large_partigyle_results').load("[% c.uri_for("/partigyle/results/large") %]", {
+    		starting_gravity : $('#large_starting_gravity').val(),
+    		starting_volume : $('#large_starting_volume').val()
+    	})
+    	return false	
+    })
+    
+    
+  });
+  </script>
+[% END %]

@@ -6,7 +6,7 @@ sub _sg_to_plato {
 	my $self = shift;
 	my $sg   = shift;
 
-	return sprintf( '%.2f', ( ( ( 182.4601 * $sg - 775.6821 ) * $sg + 1262.7794 ) * $sg - 669.5622 ) );
+	return sprintf( '%.1f', ( ( ( 182.4601 * $sg - 775.6821 ) * $sg + 1262.7794 ) * $sg - 669.5622 ) );
 }
 
 sub _plato_to_sg {
