@@ -2,7 +2,7 @@
 
 
 
-<div id="accordion">
+<div id="accordion" style="">
   <h3>Partigyle Split from Large Mash</h3>
   <div>
     <p>
@@ -10,7 +10,7 @@
 	<form>
 	
 		<label for='starting_gravity'>Full Gravity</label> <input size=6 type=text id='starting_gravity' name='starting_gravity' value='1.065'><br>
-		<label for='starting_volume'>Full Volume</label> <input size=6 type=text id='starting_volume' name='starting_volume' value='14'><br>
+		<label for='starting_volume'>Batch Volume</label> <input size=6 type=text id='starting_volume' name='starting_volume' value='5.5'><br>
 		<button id='calculate_partigyle'>Calculate</button>
 	
 	</form>
@@ -27,8 +27,8 @@
 	<div style='float:left; padding-right: 20px'>
 	<form>
 	
-		<label for='small_starting_gravity'>Small Gravity</label> <input size=6 type=text id='small_starting_gravity' name='small_starting_gravity' value='1.065'><br>
-		<label for='small_starting_volume'>Small Volume</label> <input size=6 type=text id='small_starting_volume' name='small_starting_volume' value='14'><br>
+		<label for='small_starting_gravity'>Small Gravity</label> <input size=6 type=text id='small_starting_gravity' name='small_starting_gravity' value='1.045'><br>
+		<label for='small_starting_volume'>Batch Volume</label> <input size=6 type=text id='small_starting_volume' name='small_starting_volume' value='5.5'><br>
 		<button id='small_calculate_partigyle'>Calculate</button>
 	
 	</form>
@@ -45,8 +45,8 @@
 	<div style='float:left; padding-right: 20px'>
 	<form>
 	
-		<label for='large_starting_gravity'>Large Gravity</label> <input size=6 type=text id='large_starting_gravity' name='large_starting_gravity' value='1.065'><br>
-		<label for='large_starting_volume'>Large Volume</label> <input size=6 type=text id='large_starting_volume' name='large_starting_volume' value='14'><br>
+		<label for='large_starting_gravity'>Large Gravity</label> <input size=6 type=text id='large_starting_gravity' name='large_starting_gravity' value='1.087'><br>
+		<label for='large_starting_volume'>Batch Volume</label> <input size=6 type=text id='large_starting_volume' name='large_starting_volume' value='5.5'><br>
 		<button id='large_calculate_partigyle'>Calculate</button>
 	
 	</form>
@@ -63,7 +63,10 @@
 
   <script>
   $(function() {
-    $( "#accordion" ).accordion();
+    $( "#accordion" ).accordion({
+    	  heightStyle: "content"
+
+    });
     
     $('#calculate_partigyle').bind('click', function(){ 
     	$('#partigyle_results').load("[% c.uri_for("/partigyle/results") %]", {

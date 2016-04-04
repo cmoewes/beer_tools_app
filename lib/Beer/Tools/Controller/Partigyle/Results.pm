@@ -28,7 +28,7 @@ sub index : Path : Args(0) {
 	my ( $self, $c ) = @_;
 
 	my $original_plato = Beer::Tools::Util->_sg_to_plato( $c->req->param('starting_gravity') );
-	my $results = Beer::Tools::Partigyle->return_split( plato => $original_plato, gallons => $c->req->param('starting_volume') );
+	my $results = Beer::Tools::Partigyle->return_split( plato => $original_plato, gallons => $c->req->param('starting_volume') * 2 );
 
 	foreach (@$results) {
 		$_->{gravity} = Beer::Tools::Util->_plato_to_sg2( $_->{plato} );
@@ -37,7 +37,7 @@ sub index : Path : Args(0) {
 	push @{$results},
 	  {
 		'split'   => 'full',
-		'gallons' => $c->req->param('starting_volume'),
+		'gallons' => $c->req->param('starting_volume') * 2,
 		'gravity' => $c->req->param('starting_gravity'),
 		'plato'   => $original_plato
 	  };
@@ -46,9 +46,59 @@ sub index : Path : Args(0) {
 
 }
 
-sub large : Local : Args(0) { }
+sub large : Local : Args(0) {
+	my ( $self, $c ) = @_;
 
-sub small : Local : Args(0) { }
+	my $large_plato = Beer::Tools::Util->_sg_to_plato( $c->req->param('starting_gravity') );
+
+	my $original_plato = Beer::Tools::Partigyle->total_points_from_large( plato => $large_plato, gallons => $c->req->param('starting_volume') );
+	my $results = Beer::Tools::Partigyle->return_split(
+		plato   => $original_plato,
+		gallons => $c->req->param('starting_volume') * 2
+	);
+
+	foreach (@$results) {
+		$_->{gravity} = Beer::Tools::Util->_plato_to_sg2( $_->{plato} );
+	}
+
+	push @{$results},
+	  {
+		'split'   => 'full',
+		'gallons' => $c->req->param('starting_volume') * 2,
+		'gravity' => Beer::Tools::Util->_plato_to_sg($original_plato),
+		'plato'   => $original_plato
+	  };
+
+	$c->stash( results => $results );
+
+}
+
+sub small : Local : Args(0) {
+
+	my ( $self, $c ) = @_;
+
+	my $large_plato = Beer::Tools::Util->_sg_to_plato( $c->req->param('starting_gravity') );
+
+	my $original_plato = Beer::Tools::Partigyle->total_points_from_small( plato => $large_plato, gallons => $c->req->param('starting_volume') );
+	my $results = Beer::Tools::Partigyle->return_split(
+		plato   => $original_plato,
+		gallons => $c->req->param('starting_volume') * 2
+	);
+
+	foreach (@$results) {
+		$_->{gravity} = Beer::Tools::Util->_plato_to_sg2( $_->{plato} );
+	}
+
+	push @{$results}, {
+		'split'   => 'full',
+		'gallons' => $c->req->param('starting_volume') * 2,
+		'gravity' => Beer::Tools::Util->_plato_to_sg($original_plato),
+		'plato' => $original_plato
+	};
+
+	$c->stash( results => $results );
+
+}
 
 =encoding utf8
 

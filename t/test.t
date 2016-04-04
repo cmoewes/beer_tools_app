@@ -1,17 +1,29 @@
 use Test::More;
 
 use_ok('Beer::Tools::Partigyle');
-use_ok('Beer::Tools');
 
 use Data::Dumper;
 
-my $split = Beer::Tools::Partigyle->return_split( plato => 16, gallons => 14 );
+if(1){
+	my $split = Beer::Tools::Partigyle->_total_points_from_large( plato => 20.67, gallons => 7 );
+	warn Dumper $split;
+}
 
-warn Beer::Tools->_plato_to_sg( $split->[0]->{plato} );
-warn Beer::Tools->_plato_to_sg2( $split->[0]->{plato} );
 
-warn Beer::Tools->_plato_to_sg( $split->[1]->{plato} );
-warn Beer::Tools->_plato_to_sg2( $split->[1]->{plato} );
+if(1){
+	my $split = Beer::Tools::Partigyle->_total_points_from_small( plato => 20.67, gallons => 7 );
+	warn Dumper $split;
+}
+
+if (0) {
+	my $split = Beer::Tools::Partigyle->return_split( plato => 16, gallons => 14 );
+
+	warn Beer::Tools->_plato_to_sg( $split->[0]->{plato} );
+	warn Beer::Tools->_plato_to_sg2( $split->[0]->{plato} );
+
+	warn Beer::Tools->_plato_to_sg( $split->[1]->{plato} );
+	warn Beer::Tools->_plato_to_sg2( $split->[1]->{plato} );
+}
 
 #warn Beer::Tools::Partigyle->_sg_to_plato(1.010);
 #warn Beer::Tools::Partigyle->_sg_to_plato(1.012);
